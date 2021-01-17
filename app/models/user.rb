@@ -135,22 +135,22 @@ class User < ApplicationRecord
 
   def broadcast_send_req_friend res_user
     action = "send-req"
-    NotifyReqFriendJob.perform_later self, res_user, action
+    NotifyReqFriendJob.perform_now self, res_user, action
   end
 
   def broadcast_delete_req_friend res_user
     action = "delete-req"
-    NotifyReqFriendJob.perform_later self, res_user, action
+    NotifyReqFriendJob.perform_now self, res_user, action
   end
 
   def broadcast_accept_friend res_user
     action = "accept-friend"
-    NotifyReqFriendJob.perform_later self, res_user, action
+    NotifyReqFriendJob.perform_now self, res_user, action
   end
 
   def broadcast_unfriend user
     action = "unfriend"
-    NotifyReqFriendJob.perform_later self, user, action
+    NotifyReqFriendJob.perform_now self, user, action
   end
 
   def get_friend_count
