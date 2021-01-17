@@ -1,15 +1,16 @@
 <div class="card-wrapper signup">
-  <h3>Đăng nhập</h3>
+  <h3>Sign in</h3>
   <%= form_for :session, remote: true, url: auth_sessions_path() do |f| %>
     <div class="form_line">
 
     <%= f.label "Email" %>
     <%= f.text_field :email %>
     <div class="email-error error"></div>
-    <%= f.label "Mật khẩu" %>
+    <%= f.label "Password" %>
     <%= f.password_field :password %>
     <div class="password-error error"></div>
-    <%= f.submit "Đăng nhập"%>
+    <%= f.submit "Submit"%>
     <div>
   <% end %>
+  <%= link_to "Create account", new_auth_signup_path() %>
 </div>

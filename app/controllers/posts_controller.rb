@@ -9,7 +9,7 @@ class PostsController < ApplicationController
    followers = current_user.followers.pluck(:id)
    followers.push(current_user.id)
 #   @posts = Post.get_posts_from_users followers, params[:page]
-   @posts = Post.where(user: followers).order(created_at: :desc).page params[:page]
+   @posts = Post.where(user: followers, group_id: nil).order(created_at: :desc).page params[:page]
 
    
 #   @posts = @posts = Post.paginate(page: params[:page])
@@ -75,7 +75,7 @@ class PostsController < ApplicationController
   
 private
   def message_params
-    params.require(:post).permit(:message, images: [])
+    params.require(:post).permit(:message, :group_id, images: [], files: [], videos: [])
   end
   def logged_in_user
     unless logged_in?

@@ -1,0 +1,36 @@
+<%= render "shared/header" %>
+<div class="space"></div>
+<div class="wrapper-nonposition container">
+  <div>
+  <div class="other-user-wrapper">
+    <div class="other-user-card">
+      <div class="title">People you may know</div>
+      <div class="other-user-content">
+        <%= render partial: 'shared/suggest_users' %>
+      </div>
+    </div>
+  </div>
+  </div>
+    <div>
+    <div class="card-deck-wrapper">
+      <div class='row'>
+        <div class='col'>
+          <%= link_to "New", new_group_path, class: 'btn btn-primary' %>
+        </div>
+
+        <div class='col'>
+          <%= form_for :group, url: 'groups/add_member', method: 'post', html: {class: 'form-inline' } do |f|%>
+            <%= f.label 'Code', html: {for: 'code'}%>
+            <%= f.text_field :code, html: {id: 'code', class: 'form-control mx-sm-3'}, class: 'form-control mx-sm-3' %>
+            <%= f.submit 'Join', class: 'btn btn-success'%>
+          <%end%>
+        </div>
+      </div>
+      <%= render @groups %>
+    </div>
+    </div>
+</div>
+
+
+<%= render "shared/footer" %>
+

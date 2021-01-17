@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_24_083311) do
+ActiveRecord::Schema.define(version: 2020_10_25_172008) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,35 @@ ActiveRecord::Schema.define(version: 2020_02_24_083311) do
     t.index ["current_id", "friend_id"], name: "index_friends_on_current_id_and_friend_id", unique: true
   end
 
+  create_table "group_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "group_id_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["group_id_id"], name: "index_group_users_on_group_id_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.integer "creator_id"
+    t.string "mode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
+  end
+
   create_table "identities", force: :cascade do |t|
     t.integer "user_id"
     t.string "provider"
@@ -120,6 +149,8 @@ ActiveRecord::Schema.define(version: 2020_02_24_083311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

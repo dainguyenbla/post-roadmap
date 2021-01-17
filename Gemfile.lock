@@ -21,6 +21,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.3)
     actioncable (5.2.4.1)
       actionpack (= 5.2.4.1)
       nio4r (~> 2.0)
@@ -64,6 +65,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    afm (0.2.2)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     archive-zip (0.12.0)
@@ -153,6 +155,7 @@ GEM
     ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashery (2.1.2)
     hashie (3.6.0)
     http (3.3.0)
       addressable (~> 2.3)
@@ -252,6 +255,12 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    pdf-reader (2.4.1)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     popper_js (1.14.5)
     public_suffix (4.0.1)
     puma (3.12.2)
@@ -295,6 +304,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
     rubyzip (2.0.0)
     sass (3.7.4)
@@ -335,6 +345,7 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    ttfunk (1.6.2.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -404,6 +415,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-instagram
   omniauth-twitter
+  pdf-reader
   puma (~> 3.11)
   rails (~> 5.2.3)
   redis

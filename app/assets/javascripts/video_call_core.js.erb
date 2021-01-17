@@ -24,8 +24,9 @@ window.onload = () => {
 // Ice Credentials
 const ice = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
 
-// Initialize user's own video
+// Initialize users own video
 document.onreadystatechange = () => {
+  console.log(document.readyState)
   if (document.readyState === "interactive") {
     navigator.mediaDevices
       .getUserMedia({
@@ -33,6 +34,7 @@ document.onreadystatechange = () => {
         video: true
       })
       .then(stream => {
+        console.log(stream)
         localstream = stream;
 
       })
@@ -73,8 +75,11 @@ function toggleAudio(){
   localstream.getAudioTracks()[0].enabled ? tgAudio.html("<i class='fa fa-microphone'></i>") : 
     tgAudio.html("<i class='fa fa-microphone-slash'></i>");
 }
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 const handleJoinSession = async () => {
+  await sleep(2000);
   App.session = await App.cable.subscriptions.create("VideoCallChannel", {
     connected: () => {
       broadcastData({
@@ -95,7 +100,7 @@ const handleJoinSession = async () => {
           return removeUser(data);
         case ON_OFF_VIDEO:
           data.stt ? $(".remote-video").removeClass("hidden") : $(".remote-video").addClass("hidden") ;
-          console.log("status "+data.stts);
+          console.log("status "+data.stt);
           return;
         default:
           return;
@@ -143,21 +148,29 @@ $('#close_window').on('click', function(){
  });
 const createPC = (userId, isOffer) => {
   let pc = new RTCPeerConnection(ice);
+
   pcPeers[userId] = pc;
-  stopVideo();
+  // stopVideo();
+  console.log('pc',pc,localstream, isOffer)
   pc.addStream(localstream);
+  window._e = pc
 
   isOffer &&
     pc
       .createOffer()
       .then(offer => {
-        pc.setLocalDescription(offer);
-        broadcastData({
-          type: EXCHANGE,
-          from: currentUser,
-          to: userId,
-          sdp: JSON.stringify(pc.localDescription)
-        });
+        pc.setLocalDescription(offer, function(){
+        console.log('pddddd',JSON.stringify(pc), JSON.stringify(pc.localDescription))
+
+          broadcastData({
+            type: EXCHANGE,
+            from: currentUser,
+            to: userId,
+            sdp: JSON.stringify(pc.localDescription)
+          });
+        })
+
+
       })
       .catch(logError);
 
@@ -210,10 +223,12 @@ const exchange = data => {
   let pc;
 
   if (!pcPeers[data.from]) {
-    pc = createPC(data.from, false);
+    pc = createPC(data.from, true);
   } else {
     pc = pcPeers[data.from];
   }
+
+  console.log(data, pc, pcPeers[data.from])
 
   if (data.candidate) {
     pc
@@ -223,19 +238,24 @@ const exchange = data => {
   }
 
   if (data.sdp) {
+    console.log('sdp', data)
+
     sdp = JSON.parse(data.sdp);
     pc
       .setRemoteDescription(new RTCSessionDescription(sdp))
       .then(() => {
         if (sdp.type === "offer") {
           pc.createAnswer().then(answer => {
-            pc.setLocalDescription(answer);
-            broadcastData({
-              type: EXCHANGE,
-              from: currentUser,
-              to: data.from,
-              sdp: JSON.stringify(pc.localDescription)
+            console.log('answer', answer)
+            pc.setLocalDescription(answer, function(){
+              broadcastData({
+                type: EXCHANGE,
+                from: currentUser,
+                to: data.from,
+                sdp: JSON.stringify(pc.localDescription)
+              });
             });
+            
           });
         }
       })
@@ -253,6 +273,7 @@ const broadcastData = data => {
   });
 };
 const broadcastDataEnd = data => {
+  console.log('ftech', data)
   fetch("/video_call/broadcast_data?id="+remoteUser, {
     method: "POST",
     body: JSON.stringify(data),

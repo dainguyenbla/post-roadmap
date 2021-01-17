@@ -29,8 +29,17 @@
         <p class="card-text">
             <%= post.message %>
         </p>
+        <div>
+          <% if post.videos.attached? && post.videos.count%>
+            <%= video_tag rails_blob_path(post.videos.first), :controls => true, :style => "width: 100%" %>
+          <%end%>
+          </div>
+        <div>
+          <% if post.files.attached? && post.files.count%>
+            <iframe src="<%= rails_blob_path(post.files.first, disposition: "inline") %>&embedded=true" style="width: 100%; height:700px;" frameborder="0"></iframe>
+          <%end%>
+          </div>
         <div class="post-gallery-wrap">
-
           <% if post.images.attached? && post.images.count > 1 %>
 
             <div id="images-post_<%= post.id %>" class="carousel slide" data-ride="carousel">

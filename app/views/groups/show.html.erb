@@ -1,26 +1,28 @@
-
-
-<!-- <div class="card-e" style="display: none;">
-</div> -->
 <%= render "shared/header" %>
-<div class="space"></div>
+<div class="group-bg-wrap">
+  <div class="bg-wrap">
+    <%= image_tag "bg3.jpg" %>
+  </div>
+  <div class="group-name">
+    <h3><%= @group.name %></h3>
+  </div>
+  <div>
+    <h6 style='text-align: right; padding-right: 10%;'>Code: <%= @group.code %></h6>
+  </div>
+</div>
 <div class="wrapper-nonposition container">
   <div>
-  <div class="other-user-wrapper">
-    <div class="other-user-card">
-      <div class="title">People you may know</div>
-      <div class="other-user-content">
-        <%= render partial: 'shared/suggest_users' %>
-      </div>
+    <div class='information-wrap'>
+  <div class="friend-list-wrapper common-card">
+    <div class="header-common-card">
+      <span><a href="#">Members</a></span>
+    </div>
+    <div class="friend-list">
+      <%= render partial: "friend_list", locals: {users: @users } %>
     </div>
   </div>
-  <div class="shortcut">
-    <%= link_to "Groups", groups_path %>
-
-
+    </div>
   </div>
-  </div>
-
     <div>
         <div class="card-deck-wrapper">
           <div class="new-post-input">
@@ -32,6 +34,7 @@
                     <%= f.text_area :message, id:"new_post_textarea", placeholder: "Hi #{current_user.name}, what's your mind?", onkeyup:"showPostBtn(this);" %>
                     <div class="result-upload-image" id="preview-images"></div>
                     <!--  <hr> -->
+                    <%= f.number_field :group_id, value: @group.id, hidden: true %>
                     
                     <div class="option" >
                     <%= f.file_field :images, id:'post-photo', multiple: true, onchange:"previewImages(this); showPostBtn(this);" %>
@@ -64,4 +67,5 @@
 <div id="paginator">
     <%= paginate @posts, remote: true %>
 </div>
+
 <%= render "shared/footer" %>

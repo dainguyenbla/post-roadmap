@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get '/upload_avatar', to: 'usrs#upload_avatar', as: 'upload_avatar'
   post '/update_avatar', to: 'usrs#update_avatar', as: 'update_avatar'
-  
+
   root 'posts#index' 
   resources :posts
   resources :comments
@@ -27,6 +27,11 @@ Rails.application.routes.draw do
   resources :chats
   resources :rooms
   resources :video_calls
+  resources :groups do
+    collection do
+      post 'add_member'
+    end
+  end
   namespace :auth do
     resources :signups, only: [:new, :create]
     resources :sessions, only: [:new, :create, :destroy]

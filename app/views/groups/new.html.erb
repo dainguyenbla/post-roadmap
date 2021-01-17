@@ -1,0 +1,43 @@
+<%= render "shared/header" %>
+<div class="space"></div>
+<div class="wrapper-nonposition container">
+  <div>
+  <div class="other-user-wrapper">
+    <div class="other-user-card">
+      <div class="title">People you may know</div>
+      <div class="other-user-content">
+        <%= render partial: 'shared/suggest_users' %>
+      </div>
+    </div>
+  </div>
+  <div class="shortcut">
+    <%= link_to "Groups", groups_path %>
+  </div>
+  </div>
+    <div>
+    <div class="card-deck-wrapper">
+      <div class='card card-body'>
+        <%= form_for @group do |f|%>
+          <% if @group.errors.any? %>
+          <div class="alert alert-warning" role="alert">
+            <% @group.errors.full_messages.each do |message| %>
+              <%= message %>
+            <%end%>
+          </div>
+          <%end%>
+          <div class='form-group'>
+            <%= f.label "Name group" %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Create', class: 'btn btn-primary', placeholder: 'Enter name group...'%>
+        <%end%>
+      </div>
+
+    </div>
+    </div>
+</div>
+
+
+
+<%= render "shared/footer" %>
+

@@ -1,18 +1,17 @@
-            <div class="" id="show-notify">
-              <p class="notify-title">Notify</p>
-              <hr>
-              <div class="all-notifications">
-<% notifications.each do |notification| %>
-  <% sender = User.find_by id: notification.sender_id %>
-  <% isSeen = notification.isSeen ? "" : "active" %>
-  <%= link_to notification.link, remote: true, class:"notify #{isSeen}" do %>
-                <%=  image_tag(sender.image, class:"small-avatar") %>
-                <div class="content">
-                  <span class="sender"><%= sender.name %></span><span> <%= notification.event.content %></span>
-                  <p><%= notification.interval %> <%= notification.unit %></p>
-                </div>
-              <% end %>
-            <% end %>
-                          </div>
-            </div>
-
+<div class="" id="show-notify">
+  <p class="notify-title">Notify</p>
+  <hr>
+  <div class="all-notifications">
+    <% notifications.each do |notification| %>
+    <% sender = User.find_by id: notification.sender_id %>
+    <% isSeen = notification.isSeen ? "" : "active" %>
+    <%= link_to notification.link, remote: true, class:"notify #{isSeen}" do %>
+    <%=  image_tag(sender.image, class:"small-avatar") %>
+    <div class="content">
+      <span class="sender"><%= sender.name %></span><span> <%= notification.event.content %></span>
+      <p><%= notification.interval %> <%= notification.unit %></p>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

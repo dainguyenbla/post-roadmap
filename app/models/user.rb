@@ -31,6 +31,11 @@ class User < ApplicationRecord
   has_many :usr_rooms, through: :room_users, source: :room
 
   has_many :notifications
+
+  has_many :own_groups, :class_name => 'Group', :foreign_key => 'creator_id'
+
+  has_and_belongs_to_many :groups
+
   attr_accessor :remember_token
   validates :name, :presence => { message: "Tên không được để trống"}
   VALID_PHONE_REGEX = /\b(0)+[2-9]+([0-9]{8})\b/

@@ -1,0 +1,67 @@
+// Place all the styles related to the groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.group-wrap{
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 5px;
+  margin: 10px auto;
+
+  .last-active{
+    font-size: 15px;
+    opacity: 0.6;
+  }
+}
+
+.group-bg-wrap{
+  height: 538px;
+  background: #fff;
+  border-bottom: 2px solid #E1E1E1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 30px;
+}
+.group-name{
+  padding: 12px;
+  text-align: center;
+
+  h3{
+    font-weight: 600;
+    color: darkslategray;
+  }
+}
+.information-wrap {
+    margin-top: 26px;
+        position: relative;
+        padding-right: 16px;
+        .friend-list-wrapper{
+          margin-top: 10px;
+          
+          .friend-list{
+            display: grid;
+            margin-top: 5px;
+            grid-template-columns: 33% 33% 33%;
+          
+
+
+          .a-friend{
+            text-decoration: none;
+            width: 95%;
+            p{
+              font-size: 15px;
+              line-height: 18px;
+              margin-bottom: 5px;
+              text-align: center;
+              color: cadetblue;
+            }
+
+            img{
+              max-width: 100%;
+              width: 100%;
+              border-radius: 8px;
+            }
+            
+          }
+        }
+        }
+      }

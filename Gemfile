@@ -25,6 +25,7 @@ gem 'omniauth-google-oauth2'
 gem 'twitter'
 gem 'instagram'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'pdf-reader'
 
 gem "aws-sdk-s3", require: false
 # Use Puma as the app server

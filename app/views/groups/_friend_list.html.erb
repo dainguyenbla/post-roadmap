@@ -1,0 +1,6 @@
+<% users.each do |user| %>
+<%= link_to usr_path(user), class:"a-friend" do%>
+  <%= image_tag user.image, class: "small-rect-avatar" %>
+  <p><%= user.name %></p>
+<% end %>
+<% end %>
