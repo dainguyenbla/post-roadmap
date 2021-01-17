@@ -10,7 +10,7 @@ class Post < ApplicationRecord
 
   has_many :likes, as: :duty
   belongs_to :user
-  belongs_to :group
+  belongs_to :group, optional: true
   has_many :comments,  dependent: :destroy
   paginates_per 50
 
