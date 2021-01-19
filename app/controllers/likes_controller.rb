@@ -15,7 +15,7 @@ class LikesController < ApplicationController
             if @notification.nil?
               @notification = post.user.notifications.create event_id:2, sender_id: current_user.id, link:"/posts/#{post.id}"
               count = post.user.notifications.where(isSeen: false).count
-              BroadcastNoticeJob.perform_later post.user, count, @notification
+              BroadcastNoticeJob.perform_now post.user, count, @notification
             end
           end
         elsif @like.duty_type === "Comment"
@@ -26,7 +26,7 @@ class LikesController < ApplicationController
             if @notification.nil?
               @notification = comment.user.notifications.create event_id:1, sender_id: current_user.id, link:"/posts/#{comment.post.id}?anc=cmt_#{@like.duty.id}"
               count = comment.user.notifications.where(isSeen: false).count
-              BroadcastNoticeJob.perform_later comment.user, count, @notification
+              BroadcastNoticeJob.perform_now comment.user, count, @notification
             end
           end
         end

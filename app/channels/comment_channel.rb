@@ -10,6 +10,6 @@ class CommentChannel < ApplicationCable::Channel
   def speak(data)
     cmt = Comment.find_by id: data["comment"]["id"]
     html = CommentsController.render(partial: 'comments/comment', locals:{ comment: cmt, current_user: current_user})
-    SelfUserBroadcastJob.perform_later current_user, html, data["post_id"], data["count"]
+    SelfUserBroadcastJob.perform_now current_user, html, data["post_id"], data["count"]
   end
 end

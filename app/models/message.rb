@@ -3,6 +3,6 @@ class Message < ApplicationRecord
   belongs_to :room
 
   def chat_broadcast receiver
-    ChatBroadcastJob.perform_later self, receiver
+    ChatBroadcastJob.perform_now self, receiver
   end
 end
