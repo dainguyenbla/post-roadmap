@@ -24,13 +24,7 @@
       background: black;
     height: 100vh;
 
-    #local-video{
-      max-width: 300px;
-          position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 10;
-    }
+   
 
     .control-session {
       position: fixed;
@@ -91,5 +85,27 @@
     p{
           font-size: 30px;
     color: wheat;
+    }
+}
+
+@media only screen and (max-width: 400px){
+
+ #local-video{
+    max-width: 150px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    }
+}
+
+@media only screen and (min-width: 400px){
+
+ #local-video{
+    max-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
     }
 }
